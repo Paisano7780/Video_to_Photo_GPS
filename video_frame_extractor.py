@@ -12,7 +12,6 @@ from tkinter import ttk, filedialog, messagebox
 import cv2
 from PIL import Image
 import piexif
-from datetime import datetime, timedelta
 import json
 
 
