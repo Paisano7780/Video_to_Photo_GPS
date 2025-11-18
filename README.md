@@ -130,6 +130,14 @@ Los tests verifican:
 - Adición de metadatos GPS
 - Carga de archivos JSON con datos GPS
 
+**Logging de Tests**: Los tests generan automáticamente un archivo de log detallado (`test_results.log`) que incluye:
+- Marca de tiempo de cada operación
+- Información detallada de cada test ejecutado
+- Mensajes de error completos con stack traces en caso de fallos
+- Resumen de resultados (tests pasados/fallidos)
+
+Este archivo es útil para diagnosticar problemas y entender el comportamiento de los tests.
+
 ### Linting
 
 Para verificar la calidad del código:
@@ -146,6 +154,8 @@ El proyecto usa GitHub Actions para ejecutar automáticamente los tests en cada 
 - Múltiples sistemas operativos (Ubuntu, Windows, macOS)
 
 El estado actual de los tests se muestra en el badge al inicio del README.
+
+**Logs de Tests en CI/CD**: Los logs de tests generados durante las ejecuciones de GitHub Actions se guardan como artefactos y están disponibles para descarga durante 30 días. Esto facilita la depuración de fallos en diferentes plataformas.
 
 ## Licencia
 
