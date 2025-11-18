@@ -1,0 +1,13 @@
+[flake8]
+max-line-length = 127
+exclude = 
+    .git,
+    __pycache__,
+    venv,
+    ENV,
+    env,
+    .venv
+# W293: blank line contains whitespace (many false positives, not critical)
+# E501: line too long (already set max-line-length)
+ignore = W293
+max-complexity = 15
