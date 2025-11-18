@@ -206,7 +206,7 @@ class VideoFrameExtractor:
             piexif.insert(exif_bytes, image_path)
             
         except Exception as e:
-            print(f"Error al agregar GPS a {image_path}: {str(e)}")
+            messagebox.showerror("Error", f"Error al agregar GPS a {image_path}: {str(e)}")
             
     def extract_frames(self):
         """Extrae fotogramas del video"""
