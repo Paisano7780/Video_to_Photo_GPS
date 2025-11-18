@@ -216,6 +216,14 @@ Examples:
         print(f"Error: Directory not found: {args.directory}")
         sys.exit(1)
     
+    if args.fps_original <= 0:
+        print(f"Error: Original FPS must be greater than 0, got {args.fps_original}")
+        sys.exit(1)
+    
+    if args.fps_extracted <= 0:
+        print(f"Error: Extracted FPS must be greater than 0, got {args.fps_extracted}")
+        sys.exit(1)
+    
     # Tag images
     success = tag_images(
         args.srt,
