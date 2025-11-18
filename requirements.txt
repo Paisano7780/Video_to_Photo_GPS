@@ -1,0 +1,7 @@
+# No se requieren dependencias externas de Python
+# Los scripts usan solo la biblioteca estándar de Python 3
+
+# Requisitos del sistema:
+# - Python 3.6+
+# - FFmpeg (para extracción de fotogramas)
+# - ExifTool (para escribir metadatos GPS)
