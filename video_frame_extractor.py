@@ -6,11 +6,9 @@ Extrae fotogramas de videos manteniendo la georeferenciación
 """
 
 import os
-import sys
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import cv2
-from PIL import Image
 import piexif
 import json
 
@@ -155,7 +153,12 @@ class VideoFrameExtractor:
         if filename:
             try:
                 with open(filename, 'r') as f:
-                    self.gps_data = json.load(f)
+                    gps_data = json.load(f)
+                # Validate required GPS fields
+                if not isinstance(gps_data, dict) or 'latitude' not in gps_data or 'longitude' not in gps_data:
+                    messagebox.showerror("Error", "El archivo JSON de GPS debe contener los campos 'latitude' y 'longitude'.")
+                    return
+                self.gps_data = gps_data
                 self.gps_status_label.config(text=f"GPS cargado: {os.path.basename(filename)}")
             except Exception as e:
                 messagebox.showerror("Error", f"Error al cargar datos GPS: {str(e)}")
@@ -174,7 +177,7 @@ class VideoFrameExtractor:
         s = (value - d - m / 60) * 3600
         return ((d, 1), (m, 1), (int(s * 100), 100))
     
-    def add_gps_to_image(self, image_path, lat, lon, alt=0):
+    def add_gps_to_image(self, image_path, lat, lon, alt=None):
         """Agrega datos GPS a una imagen"""
         try:
             # Cargar EXIF existente o crear nuevo
@@ -195,7 +198,7 @@ class VideoFrameExtractor:
                 piexif.GPSIFD.GPSLongitude: self.convert_to_degrees(abs(lon)),
             }
             
-            if alt != 0:
+            if alt is not None:
                 gps_ifd[piexif.GPSIFD.GPSAltitudeRef] = 0 if alt >= 0 else 1
                 gps_ifd[piexif.GPSIFD.GPSAltitude] = (int(abs(alt) * 100), 100)
             
@@ -245,9 +248,8 @@ class VideoFrameExtractor:
             
             cap.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
             
-            frame_count = 0
             extracted_count = 0
-            total_to_extract = (end_frame - start_frame) // interval
+            total_to_extract = ((end_frame - start_frame) // interval) + 1
             
             self.progress['maximum'] = total_to_extract
             self.progress['value'] = 0
@@ -274,7 +276,7 @@ class VideoFrameExtractor:
                     if self.gps_data:
                         lat = self.gps_data.get('latitude', 0)
                         lon = self.gps_data.get('longitude', 0)
-                        alt = self.gps_data.get('altitude', 0)
+                        alt = self.gps_data.get('altitude')
                         self.add_gps_to_image(filepath, lat, lon, alt)
                     
                     extracted_count += 1
@@ -283,8 +285,6 @@ class VideoFrameExtractor:
                         text=f"Extrayendo: {extracted_count}/{total_to_extract} fotogramas"
                     )
                     self.root.update()
-                
-                frame_count += 1
                 
             cap.release()
             
@@ -301,7 +301,7 @@ class VideoFrameExtractor:
 
 def main():
     root = tk.Tk()
-    app = VideoFrameExtractor(root)
+    VideoFrameExtractor(root)
     root.mainloop()
 
 

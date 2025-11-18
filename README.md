@@ -89,7 +89,7 @@ Para extraer fotogramas de un video de 10 minutos:
 - Fin: 300 (terminar en el segundo 300)
 - Intervalo de fotogramas: 30 (extraer cada 30 fotogramas)
 
-Si el video es de 30 FPS, esto extraerá aproximadamente 8 imágenes (240 segundos / 30 fotogramas por segundo * 1 extracción cada 30 fotogramas = 8 imágenes).
+Si el video es de 30 FPS, esto extraerá aproximadamente 240 imágenes (240 segundos × 30 fotogramas por segundo = 7200 fotogramas; 7200 / 30 = 240 imágenes, es decir, una imagen por segundo).
 
 ## Notas
 

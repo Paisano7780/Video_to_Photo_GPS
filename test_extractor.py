@@ -50,6 +50,7 @@ def test_frame_extraction(video_path, output_dir):
     print("\n=== Test: Extracción de Frames ===")
     cap = cv2.VideoCapture(video_path)
     
+    start_frame = 0
     frame_interval = 30
     extracted = 0
     
@@ -60,7 +61,7 @@ def test_frame_extraction(video_path, output_dir):
         
         current_frame = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
         
-        if current_frame % frame_interval == 0:
+        if (current_frame - start_frame) % frame_interval == 0:
             output_path = os.path.join(output_dir, f"test_frame_{current_frame:06d}.jpg")
             cv2.imwrite(output_path, frame)
             extracted += 1
