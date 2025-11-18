@@ -13,12 +13,28 @@ Aplicación para Windows que extrae fotogramas de videos manteniendo la georefer
 - ✅ Interfaz gráfica intuitiva en español
 - ✅ Barra de progreso para seguimiento de la extracción
 
-## Requisitos
+## Descarga Rápida (Windows)
+
+¿Solo quieres usar la aplicación sin instalar Python? 
+
+**[📥 Descarga el ejecutable (.exe) desde la sección Releases](https://github.com/Paisano7780/Video_to_Photo_GPS/releases)**
+
+- **Versión estable**: Busca la última versión que comience con `v1.0.0-`
+- **Versión de desarrollo**: Busca la última versión que comience con `dev-`
+
+Una vez descargado:
+1. Ejecuta `VideoFrameExtractor.exe`
+2. Si Windows SmartScreen muestra una advertencia, haz clic en "Más información" y luego en "Ejecutar de todas formas"
+3. ¡Listo para usar!
+
+## Instalación desde el código fuente
+
+### Requisitos
 
 - Python 3.7 o superior
 - Windows (también funciona en Linux/Mac)
 
-## Instalación
+### Pasos de instalación
 
 1. Clona o descarga este repositorio
 2. Instala las dependencias:

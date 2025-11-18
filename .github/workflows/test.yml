@@ -16,40 +16,40 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    
+
     - name: Run tests
       run: |
         python test_extractor.py
-    
+
   lint:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-    
+
     - name: Install linting dependencies
       run: |
         python -m pip install --upgrade pip
         pip install flake8
-    
+
     - name: Lint with flake8
       run: |
         # Stop the build if there are Python syntax errors or undefined names
@@ -62,25 +62,25 @@ jobs:
     runs-on: windows-latest
     needs: [test, lint]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pyinstaller
-    
+
     - name: Build executable
       run: |
         pyinstaller video_frame_extractor.spec
-    
+
     - name: Upload executable as artifact
       uses: actions/upload-artifact@v4
       with:
@@ -88,3 +88,48 @@ jobs:
         path: dist/VideoFrameExtractor.exe
         if-no-files-found: error
         retention-days: 90
+
+    - name: Get version info
+      id: version
+      shell: bash
+      run: |
+        DATE=$(date +'%Y%m%d-%H%M%S')
+        SHA_SHORT=$(git rev-parse --short HEAD)
+        echo "date=$DATE" >> $GITHUB_OUTPUT
+        echo "sha_short=$SHA_SHORT" >> $GITHUB_OUTPUT
+        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          echo "tag=v1.0.0-$DATE" >> $GITHUB_OUTPUT
+          echo "prerelease=false" >> $GITHUB_OUTPUT
+        else
+          echo "tag=dev-$DATE" >> $GITHUB_OUTPUT
+          echo "prerelease=true" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ steps.version.outputs.tag }}
+        name: VideoFrameExtractor ${{ steps.version.outputs.tag }}
+        body: |
+          Executable de Windows para el Extractor de Fotogramas con GPS
+
+          **Características:**
+          - ✅ Extracción de fotogramas de videos en múltiples formatos
+          - ✅ Preservación de datos GPS en imágenes
+          - ✅ Interfaz gráfica intuitiva en español
+          - ✅ Barra de progreso para seguimiento
+
+          **Instrucciones de uso:**
+          1. Descarga `VideoFrameExtractor.exe`
+          2. Ejecuta el archivo (puede que Windows SmartScreen muestre una advertencia, elige "Más información" y luego "Ejecutar de todas formas")
+          3. Selecciona tu video y configura la extracción
+          4. Para más detalles, consulta el [README](https://github.com/Paisano7780/Video_to_Photo_GPS/blob/main/README.md)
+
+          **Información de Build:**
+          - Commit: ${{ steps.version.outputs.sha_short }}
+          - Fecha: ${{ steps.version.outputs.date }}
+        files: |
+          dist/VideoFrameExtractor.exe
+        draft: false
+        prerelease: ${{ steps.version.outputs.prerelease }}
+        fail_on_unmatched_files: true
