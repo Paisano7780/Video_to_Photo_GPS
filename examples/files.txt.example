@@ -1,0 +1,14 @@
+# Archivo de ejemplo para concatenación de videos
+# Renombra este archivo a files.txt y actualiza las rutas
+
+# Formato: file '/ruta/completa/al/video.MP4'
+# Usa rutas absolutas para evitar problemas
+
+file '/Volumes/Video/Footage/2022-12-16/Hill/DJI_0251.MP4'
+file '/Volumes/Video/Footage/2022-12-16/Hill/DJI_0252.MP4'
+file '/Volumes/Video/Footage/2022-12-16/Hill/DJI_0253.MP4'
+
+# Asegúrate de que:
+# 1. Las rutas sean correctas y los archivos existan
+# 2. Los archivos SRT correspondientes (DJI_0251.SRT, etc.) estén en la misma ubicación
+# 3. Los videos estén en el orden correcto
