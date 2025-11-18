@@ -11,7 +11,7 @@ import argparse
 import os
 import re
 import sys
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 
 def parse_timestamp(timestamp_str):
