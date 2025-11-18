@@ -180,7 +180,10 @@ class VideoFrameExtractor:
             # Cargar EXIF existente o crear nuevo
             try:
                 exif_dict = piexif.load(image_path)
-            except:
+            except piexif.InvalidImageDataError:
+                exif_dict = {"0th": {}, "Exif": {}, "GPS": {}, "1st": {}, "thumbnail": None}
+            except Exception as e:
+                print(f"Error inesperado al cargar EXIF de {image_path}: {str(e)}")
                 exif_dict = {"0th": {}, "Exif": {}, "GPS": {}, "1st": {}, "thumbnail": None}
             
             # Preparar datos GPS
