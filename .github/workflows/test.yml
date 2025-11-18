@@ -81,6 +81,19 @@ jobs:
       run: |
         pyinstaller video_frame_extractor.spec
     
+    - name: Verify executable build
+      run: |
+        if (Test-Path "dist/VideoFrameExtractor.exe") {
+          Write-Host "✓ Executable built successfully: VideoFrameExtractor.exe"
+          $fileInfo = Get-Item "dist/VideoFrameExtractor.exe"
+          Write-Host "File size: $($fileInfo.Length) bytes"
+          Write-Host "Last modified: $($fileInfo.LastWriteTime)"
+        } else {
+          Write-Error "✗ ERROR: VideoFrameExtractor.exe was not created"
+          exit 1
+        }
+      shell: pwsh
+    
     - name: Upload executable as artifact
       uses: actions/upload-artifact@v4
       with:
