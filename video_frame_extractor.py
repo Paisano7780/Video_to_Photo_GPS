@@ -374,6 +374,13 @@ class VideoFrameExtractor:
                 "Por favor, seleccione una carpeta de salida")
             return
 
+        if self.video_fps <= 0:
+            messagebox.showerror(
+                "Error",
+                "El video no tiene un FPS válido. "
+                "El archivo puede estar corrupto.")
+            return
+
         try:
             start = float(self.start_time.get())
             end = float(self.end_time.get())
