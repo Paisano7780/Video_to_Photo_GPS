@@ -128,8 +128,7 @@ jobs:
           **Información de Build:**
           - Commit: ${{ steps.version.outputs.sha_short }}
           - Fecha: ${{ steps.version.outputs.date }}
-        files: |
-          dist/VideoFrameExtractor.exe
+        files: dist/VideoFrameExtractor.exe
         draft: false
         prerelease: ${{ steps.version.outputs.prerelease }}
         fail_on_unmatched_files: true
