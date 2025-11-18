@@ -67,3 +67,4 @@ test_data/
 # Excepciones para ejemplos
 !examples/*.txt.example
 !examples/*.srt.example
+!examples/example.srt

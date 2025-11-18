@@ -1,0 +1,24 @@
+1
+00:00:00,000 --> 00:00:00,033
+[latitude: 40.712776] [longitude: -74.005974] [altitude: 100.5]
+[iso : 100] [shutter : 1/120.0] [fnum : 280] [ev : 0] [ct : 5500] [color_md : default] [focal_len : 240] [latitude: 40.712776] [longitude: -74.005974] [altitude: 100.5] 
+
+2
+00:00:00,033 --> 00:00:00,067
+[latitude: 40.712780] [longitude: -74.005978] [altitude: 100.6]
+[iso : 100] [shutter : 1/120.0] [fnum : 280] [ev : 0] [ct : 5500] [color_md : default] [focal_len : 240] [latitude: 40.712780] [longitude: -74.005978] [altitude: 100.6] 
+
+3
+00:00:00,067 --> 00:00:00,100
+[latitude: 40.712784] [longitude: -74.005982] [altitude: 100.7]
+[iso : 100] [shutter : 1/120.0] [fnum : 280] [ev : 0] [ct : 5500] [color_md : default] [focal_len : 240] [latitude: 40.712784] [longitude: -74.005982] [altitude: 100.7] 
+
+4
+00:00:00,100 --> 00:00:00,133
+[latitude: 40.712788] [longitude: -74.005986] [altitude: 100.8]
+[iso : 100] [shutter : 1/120.0] [fnum : 280] [ev : 0] [ct : 5500] [color_md : default] [focal_len : 240] [latitude: 40.712788] [longitude: -74.005986] [altitude: 100.8] 
+
+5
+00:00:00,133 --> 00:00:00,167
+[latitude: 40.712792] [longitude: -74.005990] [altitude: 100.9]
+[iso : 100] [shutter : 1/120.0] [fnum : 280] [ev : 0] [ct : 5500] [color_md : default] [focal_len : 240] [latitude: 40.712792] [longitude: -74.005990] [altitude: 100.9] 
