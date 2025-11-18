@@ -23,18 +23,27 @@ def parse_timestamp(timestamp_str):
         
     Returns:
         timedelta object
+    
+    Raises:
+        ValueError: If timestamp format is invalid
     """
-    # Replace comma with period for milliseconds
-    timestamp_str = timestamp_str.replace(',', '.')
-    
-    parts = timestamp_str.split(':')
-    hours = int(parts[0])
-    minutes = int(parts[1])
-    seconds_parts = parts[2].split('.')
-    seconds = int(seconds_parts[0])
-    milliseconds = int(seconds_parts[1]) if len(seconds_parts) > 1 else 0
-    
-    return timedelta(hours=hours, minutes=minutes, seconds=seconds, milliseconds=milliseconds)
+    try:
+        # Replace comma with period for milliseconds
+        timestamp_str = timestamp_str.replace(',', '.')
+        
+        parts = timestamp_str.split(':')
+        if len(parts) != 3:
+            raise ValueError(f"Invalid timestamp format: {timestamp_str}")
+        
+        hours = int(parts[0])
+        minutes = int(parts[1])
+        seconds_parts = parts[2].split('.')
+        seconds = int(seconds_parts[0])
+        milliseconds = int(seconds_parts[1]) if len(seconds_parts) > 1 else 0
+        
+        return timedelta(hours=hours, minutes=minutes, seconds=seconds, milliseconds=milliseconds)
+    except (ValueError, IndexError) as e:
+        raise ValueError(f"Invalid timestamp format '{timestamp_str}': {e}")
 
 
 def format_timestamp(td):
