@@ -11,7 +11,6 @@ import os
 import re
 import subprocess
 import sys
-from datetime import datetime, timedelta
 
 
 def parse_srt_file(srt_path):

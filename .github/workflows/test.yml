@@ -7,7 +7,7 @@ on:
     branches: [ main, develop ]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   test:
@@ -56,3 +56,35 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # Report all other issues (exit-zero treats all errors as warnings)
         flake8 . --count --exit-zero --statistics
+
+  build:
+    name: Build Windows Executable
+    runs-on: windows-latest
+    needs: [test, lint]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+    
+    - name: Build executable
+      run: |
+        pyinstaller video_frame_extractor.spec
+    
+    - name: Upload executable as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: VideoFrameExtractor-windows
+        path: dist/VideoFrameExtractor.exe
+        if-no-files-found: error
+        retention-days: 90
