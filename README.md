@@ -1,5 +1,7 @@
 # Video_to_Photo_GPS
 
+[![Tests](https://github.com/Paisano7780/Video_to_Photo_GPS/actions/workflows/test.yml/badge.svg)](https://github.com/Paisano7780/Video_to_Photo_GPS/actions/workflows/test.yml)
+
 Aplicación para Windows que extrae fotogramas de videos manteniendo la georeferenciación.
 
 ## Características
@@ -111,6 +113,39 @@ Si el video es de 30 FPS, esto extraerá aproximadamente 240 imágenes (240 segu
 **La aplicación no se abre**
 - Verifica que Python esté correctamente instalado
 - Ejecuta desde la línea de comandos para ver mensajes de error
+
+## Desarrollo y Testing
+
+### Ejecutar Tests
+
+El proyecto incluye tests automatizados que puedes ejecutar localmente:
+
+```bash
+python test_extractor.py
+```
+
+Los tests verifican:
+- Lectura correcta de videos
+- Extracción de fotogramas
+- Adición de metadatos GPS
+- Carga de archivos JSON con datos GPS
+
+### Linting
+
+Para verificar la calidad del código:
+
+```bash
+pip install flake8
+flake8 .
+```
+
+### GitHub Actions
+
+El proyecto usa GitHub Actions para ejecutar automáticamente los tests en cada commit. Los tests se ejecutan en:
+- Múltiples versiones de Python (3.8, 3.9, 3.10, 3.11, 3.12)
+- Múltiples sistemas operativos (Ubuntu, Windows, macOS)
+
+El estado actual de los tests se muestra en el badge al inicio del README.
 
 ## Licencia
 
